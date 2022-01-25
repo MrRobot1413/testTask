@@ -3,24 +3,25 @@ package ru.mrrobot1413.testTask.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.withContext
-import ru.mrrobot1413.testTask.data.GetPostsResponse
 import ru.mrrobot1413.testTask.data.GetPostsResponseData
+import ru.mrrobot1413.testTask.db.AppDatabase
 import ru.mrrobot1413.testTask.db.CacheDao
-import ru.mrrobot1413.testTask.network.Api
+import ru.mrrobot1413.testTask.ui.home.HomeCachePagingSource
 import ru.mrrobot1413.testTask.ui.home.HomePagingSource
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class PostsRepository @Inject constructor(
-    private val api: Api,
+class CacheRepository @Inject constructor(
     private val cacheDao: CacheDao
 ) {
 
-    suspend fun getPosts(): Flow<PagingData<GetPostsResponseData>> {
+    suspend fun insertAll(list: List<GetPostsResponseData>) {
+        cacheDao.insertAll(list)
+    }
+
+    suspend fun selectAll(): Flow<PagingData<GetPostsResponseData>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 20,
@@ -28,7 +29,7 @@ class PostsRepository @Inject constructor(
                 initialLoadSize = 40
             ),
             pagingSourceFactory = {
-                HomePagingSource(api, cacheDao)
+                HomeCachePagingSource(cacheDao)
             }
         ).flow
     }
