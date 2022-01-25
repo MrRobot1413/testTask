@@ -30,7 +30,6 @@ class HomeViewModel @Inject constructor(
                 postsRepository.getPosts().cachedIn(viewModelScope).collect {
                     _posts.postValue(it)
                 }
-                cacheRepository.selectAll()
             } catch (e: Exception) {
                 _error.postValue(e.message)
             }
