@@ -9,7 +9,6 @@ import dagger.hilt.components.SingletonComponent
 import ru.mrrobot1413.testTask.db.AppDatabase
 import ru.mrrobot1413.testTask.db.CacheDao
 import ru.mrrobot1413.testTask.network.Api
-import ru.mrrobot1413.testTask.repository.CacheRepository
 import ru.mrrobot1413.testTask.repository.PostsRepository
 import javax.inject.Singleton
 
@@ -21,12 +20,6 @@ object RepositoriesModule {
     @Singleton
     fun providePostsRepository(api: Api, cacheDao: CacheDao): PostsRepository {
         return PostsRepository(api, cacheDao)
-    }
-
-    @Provides
-    @Singleton
-    fun provideCacheRepository(cacheDao: CacheDao): CacheRepository {
-        return CacheRepository(cacheDao)
     }
 
     @Provides

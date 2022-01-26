@@ -8,14 +8,12 @@ import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ru.mrrobot1413.testTask.data.GetPostsResponseData
-import ru.mrrobot1413.testTask.repository.CacheRepository
 import ru.mrrobot1413.testTask.repository.PostsRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val postsRepository: PostsRepository,
-    private val cacheRepository: CacheRepository
+    private val postsRepository: PostsRepository
 ) : ViewModel() {
 
     private val _posts = MutableLiveData<PagingData<GetPostsResponseData>>()

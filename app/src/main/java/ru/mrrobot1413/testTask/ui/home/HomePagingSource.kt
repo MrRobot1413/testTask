@@ -34,9 +34,9 @@ class HomePagingSource(
             cacheDao.insertAll(list)
             val data = cacheDao.selectAll(position)
             LoadResult.Page(
-                data = apiRequest.data,
+                data = data,
                 prevKey = null,
-                nextKey = if (apiRequest.data.isEmpty()) null else position + 1
+                nextKey = if (data.isEmpty()) null else position + 1
             )
         } catch (e: IOException) {
             val data = cacheDao.selectAll(position)

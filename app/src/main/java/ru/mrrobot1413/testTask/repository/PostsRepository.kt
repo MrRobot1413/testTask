@@ -20,11 +20,11 @@ class PostsRepository @Inject constructor(
     private val cacheDao: CacheDao
 ) {
 
-    suspend fun getPosts(): Flow<PagingData<GetPostsResponseData>> {
+    fun getPosts(): Flow<PagingData<GetPostsResponseData>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 20,
-                prefetchDistance = 40,
+                prefetchDistance = 20,
                 initialLoadSize = 40
             ),
             pagingSourceFactory = {

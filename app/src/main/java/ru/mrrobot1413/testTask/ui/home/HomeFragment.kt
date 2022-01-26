@@ -58,7 +58,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     progress.isVisible = loadStates.refresh is LoadState.Loading
                     recyclerView.isVisible = loadStates.refresh is LoadState.NotLoading
                     btnRetry.isVisible = loadStates.refresh is LoadState.Error
-                    binding.btnRetry.isVisible = !NetworkUtil.isInternetAvailable(requireContext())
+                    btnRetry.isVisible = !NetworkUtil.isInternetAvailable(requireContext())
+                    noConnectionSign.isVisible = !NetworkUtil.isInternetAvailable(requireContext())
                 }
             }
 
